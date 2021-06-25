@@ -12,14 +12,17 @@ public class MyApp {
 
         app.command("/score", (req, ctx) -> {
             String p = req.getPayload().getText();
-            l.parseAndAdd(p);
-            return ctx.ack(":wave: " + p);
+            boolean success = l.parseAndAdd(p);
+            if (success) {
+                return ctx.ack(":woman-golfing: " + p);
+            }
+            return ctx.ack("Please enter all necessary arguments!");
         });
 
         app.command("/leader", (req, ctx) -> {
             String x = l.getLeaderBoard();
-            x = "\n:golf: Leader Board :golf:\n";
-            return ctx.ack(x);
+            String y = "\n:golf: Leader Board :golf:\n";
+            return ctx.ack(y + x);
         });
 
         // SocketModeApp expects an env variable: SLACK_APP_TOKEN

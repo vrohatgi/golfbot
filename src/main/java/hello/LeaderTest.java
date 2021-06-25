@@ -22,4 +22,13 @@ public class LeaderTest {
         assertTrue(Integer.toString(l.gameData.get("someGame").get("vanyar")).equals("8"));
     }
 
+    @Test
+    public void testGetLeaderboard() {
+        System.out.println("Testing getLeaderboard() function!");
+        Leader l = new Leader();
+        String p = "someGame vanyar 8";
+        l.parseAndAdd(p);
+        assertTrue("someGame vanyar 8".equals(l.getLeaderBoard()));
+    }
+
 }
