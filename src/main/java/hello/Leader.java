@@ -135,7 +135,7 @@ public class Leader {
                 }
             });
             for (int i = 0; i < rows.size(); i++) {
-                res += (rows.get(i) + "\n");
+                res += (Integer.toString(i+1) + ". " + rows.get(i) + "\n");
             }
             br.close();
             return res;
