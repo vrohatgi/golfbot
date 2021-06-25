@@ -115,22 +115,23 @@ public class Leader {
 
     public String getLeaderBoard() {
         writeToFile();
+        String res = "";
         try {
             FileReader fr = new FileReader("van.txt");
             BufferedReader br = new BufferedReader(fr);
             String line = br.readLine();
-            String res = "";
             ArrayList<String> rows = new ArrayList<String>();
             while(line != null) {
-                rows.add(line);
+                if (!line.equals("")) {
+                    rows.add(line);
+                }
                 line = br.readLine();
             }
             Collections.sort(rows, new Comparator<String>() {
                 @Override
                 public int compare(String o1, String o2) {
-                    // provide your comparison logic here
-                    int o1Score = Integer.parseInt(o1.split("\\s+")[2]);
-                    int o2Score = Integer.parseInt(o2.split("\\s+")[2]);
+                    int o1Score = Integer.parseInt((o1.split("\\s+"))[2]);
+                    int o2Score = Integer.parseInt((o2.split("\\s+"))[2]);
                     return o1Score - o2Score;
                 }
             });
@@ -140,9 +141,9 @@ public class Leader {
             br.close();
             return res;
         } catch (Exception e) {
-            System.out.println("An error occurred.");
+            System.out.printf("An error occurred.");
             e.printStackTrace();
-            return "failed";
+            return e.toString() + ":" + e.getStackTrace()[0].toString() + ":" + res;
         }
     }
 }
